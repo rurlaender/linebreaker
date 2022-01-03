@@ -44,3 +44,30 @@ class Exercise:
             str: The json string
         """
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+
+class Workout:
+    """Describes a workout with different exercises
+    """
+    title: str
+    description: str
+    exercises: List[Exercise]
+
+    def __init__(self, title: str, description: str, exercises: List[Exercise]) -> None:
+        """Initializes a workout
+
+        Args:
+            title (str): The title of the workout
+            description (str): A short description for the workout
+            exercises (List[Exercise]): A list of exercises that defines the workout
+        """
+        self.title = title
+        self.description = description
+        self.exercises = exercises
+    
+    def toJSON(self) -> str:
+        """Returns the workout as an json string
+
+        Returns:
+            str: The json string
+        """
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
