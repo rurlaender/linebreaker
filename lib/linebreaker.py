@@ -1,6 +1,22 @@
 from typing import List
 import json
 
+class BaseHolds:
+    """Defining the holds for the LineBreakerBaseBoard
+    """
+    Jugs = 1
+    Sloper_32_5 = 2
+    Sloper_22_5 = 3
+    Four_Finger_16 = 4
+    Four_Finger_20 = 5
+    Four_Finger_37 = 6
+    Three_Finger_18 = 7
+    Three_Finger_28 = 8
+    Three_Finger_45 = 9
+    Two_Finger_24 = 10
+    Two_Finger_30 = 11
+    Two_Finger_50 = 12
+    Sloper_35 = 13
 
 class Exercise:
     """Describing a single hang board exercise
@@ -37,13 +53,13 @@ class Exercise:
         self.repetitions = repetitions
         self.pause = pause
     
-    def toJSON(self) -> str:
+    def toJSON(self, indent=4) -> str:
         """Returns the exercise as a json string
 
         Returns:
             str: The json string
         """
-        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=indent)
 
 class Workout:
     """Describes a workout with different exercises
@@ -64,10 +80,36 @@ class Workout:
         self.description = description
         self.exercises = exercises
     
-    def toJSON(self) -> str:
+    def toJSON(self, indent=4) -> str:
         """Returns the workout as an json string
 
         Returns:
             str: The json string
         """
-        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=indent)
+
+class AppData:
+    """Representing the export or import data for the app
+    """
+    version: int
+    LinebreakerBASE  : List[Workout]
+    LinebreakerPRO   : List[Workout]
+    LinebreakerAIR   : List[Workout]
+    LinebreakerRAIL  : List[Workout]
+    LinebreakerCRIMP : List[Workout]
+
+    def __init__(self, version: int, LinebreakerBASE: List[Workout], LinebreakerPRO: List[Workout],LinebreakerAIR: List[Workout],LinebreakerRAIL: List[Workout],LinebreakerCRIMP: List[Workout]) -> None:
+        self.version = version
+        self.LinebreakerBASE = LinebreakerBASE
+        self.LinebreakerPRO = LinebreakerPRO
+        self.LinebreakerAIR = LinebreakerAIR
+        self.LinebreakerRAIL = LinebreakerRAIL
+        self.LinebreakerCRIMP = LinebreakerCRIMP
+
+    def toJSON(self, indent=4) -> str:
+        """Returns the workout as an json string
+
+        Returns:
+            str: The json string
+        """
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=indent)

@@ -1,8 +1,8 @@
-from lib.linebreaker import Workout, Exercise
+from lib.linebreaker import Workout, Exercise, BaseHolds
 import json
 
 def test_workout_01():
-    exe = Exercise("Jugs","",1,1,10,5,4,90)
+    exe = Exercise("Jugs","",BaseHolds.Jugs,BaseHolds.Jugs,10,5,4,90)
     work = Workout("First workout", "A short description",[exe])
     str = '"title": "First workout"'
     assert str in work.toJSON()
